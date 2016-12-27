@@ -1,0 +1,28 @@
+{
+	"name": "mediawiki/finnframenet",
+	"type": "mediawiki-extension",
+	"description": "Code to import and display FinnFrameNet and TransFrameNet in a MediaWiki",
+	"homepage": "https://github.com/Nikerabbit/mediawiki-extensions-FinnFrameNet",
+	"authors": [
+		{
+			"name": "Niklas Laxström",
+			"email": "niklas.laxstrom@gmail.com",
+			"role": "Author"
+		}
+	],
+	"require": {
+		"php": ">=5.5.9",
+		"composer/installers": ">=1.0.1"
+	},
+	"require-dev": {
+		"jakub-onderka/php-parallel-lint": "0.9.2",
+		"mediawiki/mediawiki-codesniffer": "0.7.2"
+	},
+	"scripts": {
+		"fix": "phpcbf",
+		"test": [
+			"parallel-lint . --exclude vendor",
+			"phpcs -p -s"
+		]
+	}
+}

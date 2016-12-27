@@ -1,0 +1,39 @@
+{
+	"name": "FinnFrameNet",
+	"version": "1.0.0",
+	"author": [
+		"Niklas Laxström"
+	],
+	"url": "https://github.com/Nikerabbit/mediawiki-extensions-FinnFrameNet",
+	"description": "Code to import and display FinnFrameNet and TransFrameNet in a MediaWiki",
+	"license-name": "GPL-2.0+",
+	"AutoloadClasses": {
+		"FinnFrameNet\\Hooks": "Hooks.php"
+	},
+	"Hooks": {
+		"BeforePageDisplay": "FinnFrameNet\\Hooks::onBeforePageDisplay",
+		"ContentAlterParserOutput": "FinnFrameNet\\Hooks::onContentAlterParserOutput"
+	},
+	"ResourceModules": {
+		"ext.finnframenet": {
+			"scripts": "main.js",
+			"localBasePath": "modules",
+			"remoteExtPath": "FinnFrameNet/modules",
+			"dependencies": [
+				"jquery.stickykit",
+				"mediawiki.ui.button"
+			]
+		},
+		"ext.finnframenet.styles": {
+			"styles": "styles.less",
+			"localBasePath": "modules",
+			"remoteExtPath": "FinnFrameNet/modules"
+		},
+		"jquery.stickykit": {
+			"scripts": "jquery.sticky-kit.js",
+			"localBasePath": "libs",
+			"remoteExtPath": "FinnFrameNet/libs"
+		}
+	},
+	"manifest_version": 1
+}

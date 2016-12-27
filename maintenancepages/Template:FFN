@@ -1,0 +1,11 @@
+<includonly><onlyinclude>__NOTOC__<div style="display: flex; justify-content: space-between;">
+<div class="ffn-sentences">
+{{{contents}}}
+</div>
+<div>
+  <div class="ffn-typelist">{{#arraymap:{{{types}}}|;|#|<span class="ffn-fe ffn-ann-#">#</span><br>|&#32;}}</div>
+</div>
+</div>
+[[Category:{{NAMESPACE}}]]
+</onlyinclude></includeonly>
+[[Category:FinnWordNet maintenance]]

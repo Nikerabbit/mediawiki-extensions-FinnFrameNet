@@ -1,0 +1,60 @@
+.ffn-fe {
+	border-bottom: 2px solid transparent;
+}
+
+.ffn-feh {
+	border-bottom: 2px solid gray;
+}
+
+.ffn-translation {
+	font-size: smaller;
+	margin-top: -0.5ex;
+	margin-bottom: -0.5ex;
+}
+
+.ffn-ann-FEE {
+	font-variant: small-caps;
+	font-weight: bold;
+}
+
+.ffn-typelist {
+	font-size: 120%;
+	border-left: 2px dashed gray;
+	padding: 0 1em;
+	margin-left: 1em;
+
+	.ffn-fe {
+		cursor: pointer;
+	}
+}
+
+.ffn-sentences {
+	font-size: 120%;
+
+	li {
+		margin-bottom: 0.3em;
+	}
+}
+
+.ffn-hide {
+	display: none;
+}
+
+.ffn-filter {
+	font-weight: bold;
+	border-left: 2px solid gray;
+	padding-left: 2px;
+	margin-left: -4px;
+}
+
+.ffn-show-anns .ffn-fe::before,
+.ffn-show-anns .ffn-fe::after {
+	position: relative;
+	font-variant: small-caps;
+	font-size: 80%;
+	bottom: -0.5ex;
+}
+
+.ffn-show-anns .ffn-fe::after {
+	content: " ]";
+}
