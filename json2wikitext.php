@@ -24,6 +24,8 @@ function parseEntry( array $entry ) {
 	}
 
 	$text = stringify( $linearDoc );
+	$frame = trim( $frame, ' _' );
+
 	return [ "FinnFrameNet:$frame" => [ $fiLU => $text ] ];
 }
 
@@ -146,7 +148,7 @@ function splitMultiPart( $sentence ) {
 			if ( $c === 0 ) {
 				$delta = count( $segments );
 				// For punctuation, overwrite previous space
-				if ( preg_match( '/[.,?!:;]/', $word ) ) {
+				if ( preg_match( '/^[.,?!:;]$/', $word ) ) {
 					$copyIndex = max( 0, $copyIndex -1 );
 				}
 			}

@@ -83,7 +83,7 @@
 			.click( function () {
 				$( '.ffn-sentences' ).toggleClass( 'ffn-show-anns' );
 			} );
-		$( '.ffn-typelist p' ).append( $annToggle );
+		$( '.ffn-typelist' ).append( $annToggle );
 	}
 
 	if ( document.readyState === 'interactive' ) {

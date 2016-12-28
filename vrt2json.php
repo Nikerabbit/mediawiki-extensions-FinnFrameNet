@@ -55,7 +55,7 @@ function parseAttributes( $string ) {
 	$matches = [];
 	preg_match_all( '~([a-z]+)="([^"]*)"~', $string, $matches, PREG_SET_ORDER );
 	foreach ( $matches as $match ) {
-		$output[$match[1]] = $match[2];
+		$output[$match[1]] = trim( $match[2] );
 	}
 
 	return $output;
