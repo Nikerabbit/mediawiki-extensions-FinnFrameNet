@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kareyac"
+		]
+	},
+	"ffn-desc": "Отображает FinnFrameNet и TransFrameNet в формате wiki",
+	"ffn-search-lus": "Поиск других кадров, содержащих данную лексическую единицу",
+	"ffn-actions--annotations": "Примечания",
+	"ffn-actions--toc": "Содержание",
+	"ffn-fe-help": "(информация)"
+}
