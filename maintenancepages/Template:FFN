@@ -1,11 +1,12 @@
-<includonly><onlyinclude>__NOTOC__<div style="display: flex; justify-content: space-between;">
+<includonly><onlyinclude><div class="ffn-actions"></div><div class="ffn-columns">
+<div class="ffn-toc ffn-hide">__TOC__</div>
 <div class="ffn-sentences">
 {{{contents}}}
 </div>
 <div>
-  <div class="ffn-typelist">{{#arraymap:{{{types}}}|;|#|<span class="ffn-fe ffn-ann-#">#</span><br>|&#32;}}</div>
+  <div class="ffn-typelist">{{#arraymap:{{{types}}}|;|@|<span class="ffn-fe ffn-ann-@">@</span>&nbsp;{{#ifexist:FrameNet/@|[[FrameNet/@|{{INT:ffn-fe-help}}]]}}<br>|&#32;}}</div>
 </div>
 </div>
 [[Category:{{NAMESPACE}}]]
 </onlyinclude></includeonly>
-[[Category:FinnWordNet maintenance]]
+[[Category:FrameNet maintenance]]

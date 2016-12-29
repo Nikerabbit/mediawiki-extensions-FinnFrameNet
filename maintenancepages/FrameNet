@@ -1,0 +1,11 @@
+* [[:Category:FinnFrameNet|Luettelo FinnFrameNetin kehyksistä]]
+* [[:Category:TransFrameNet|Luettelo TransFrameNetin kehyksistä]]
+* [[:Category:FrameNet element|Luettelo kehyselementeistä]]
+
+== Haku ==
+<inputbox>
+type=fulltext
+namespaces=FinnFrameNet**,TransFrameNet**
+</inputbox>
+
+[[Category:FrameNet maintenance]]

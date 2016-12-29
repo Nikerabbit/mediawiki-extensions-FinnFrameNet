@@ -1,0 +1,7 @@
+<includonly><onlyinclude>''{{{type}}}''
+
+; FinnFrameNet: {{#arraymap:{{{frames}}}|;|#|[[FinnFrameNet:{{UCFIRST:#}}|{{UCFIRST:#}}]]}}
+; TransFrameNet: {{#arraymap:{{{frames}}}|;|#|[[TransFrameNet:{{UCFIRST:#}}|{{UCFIRST:#}}]]}}
+[[Category:FrameNet element|{{{name}}}]]
+</onlyinclude></includeonly>
+[[Category:FrameNet maintenance]]
