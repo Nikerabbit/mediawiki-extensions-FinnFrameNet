@@ -1,4 +1,5 @@
 {
+	"ffn-desc": "{{desc|name=FinnWordNet|url=https://github.com/Nikerabbit/mediawiki-extensions-FinnFrameNet}}",
 	"ffn-search-lus": "Tooltip for search icon. {{ffn-example-page}}",
 	"ffn-actions--annotations": "Button text. {{ffn-example-page}}",
 	"ffn-actions--toc": "Button text. {{ffn-example-page}}",
