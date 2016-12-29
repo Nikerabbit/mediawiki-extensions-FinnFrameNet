@@ -205,8 +205,16 @@ function process( $IN, $OUT ) {
 		}
 
 		$contents = '';
+
+		ksort( $sections );
+		if ( isset( $sections['???'] ) ) {
+			$temp = $sections['???'];
+			unset( $sections['???'] );
+			$sections['???'] = $temp;
+		}
+
 		foreach ( $sections as $section => $entries ) {
-			$contents .= "== $section ==\n";
+			$contents .= "== [[FrameNet:Has lexical unit::$section]] ==\n";
 			foreach ( $entries as $entry ) {
 				$contents .= "* $entry\n";
 			}
@@ -216,6 +224,6 @@ function process( $IN, $OUT ) {
 		$contents = "{{FFN\n|types=\n$types\n|contents=\n$contents}}";
 
 		$page = strtr( $page, '_', ' ' );
-		file_put_contents( "entrypages/$page", $contents );
+		file_put_contents( "$OUT/$page", $contents );
 	}
 }

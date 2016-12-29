@@ -1,7 +1,5 @@
 <?php
 
-ini_set( 'memory_limit', '2G' );
-
 $IN = isset( $argv[1] ) ? $argv[1] : 'descriptions.json';
 $OUT = isset( $argv[2] ) ? $argv[2] : 'entrypages';
 

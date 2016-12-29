@@ -1,6 +1,6 @@
 <?php
 /**
- * Application form.
+ * Hooks.
  *
  * @file
  * @author Niklas Laxström
@@ -72,15 +72,18 @@ class Hooks {
 
 	private static function getCSS( $types ) {
 		$css = [];
-		$len = min( count( $types ), count( self::$colors ) );
+		$len = count( $types );
 
+		$j = 0;
 		for ( $i = 0; $i < $len; $i++ ) {
-			$type = $types[$i];
-			$color = self::$colors[$i];
-			if ( $type !== 'FEE' ) {
+			$type = trim( $types[$i] );
+			$color = self::$colors[$j % count( self::$colors )];
+			if ( $type !== 'FEE' && $type !== 'FEEM' ) {
+				$j++;
 				$css[] = ".ffn-ann-$type { color: $color; }";
 			}
-			$css[] = ".ffn-show-anns .ffn-ann-$type::before { content: '[$type '; }";
+			$css[] = ".ffn-show-anns .ffn-ann-$type::before,";
+			$css[] = ".client-nojs .ffn-sentences .ffn-ann-$type::before { content: '[$type '; }";
 		}
 
 		return implode( "\n", $css );

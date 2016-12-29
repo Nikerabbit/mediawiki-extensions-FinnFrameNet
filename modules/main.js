@@ -1,4 +1,4 @@
-( function ( $ ) {
+( function ( $, mw ) {
 	function getAnnotationType( element ) {
 		var match = $( element ).attr( 'class' ).match( /ffn-ann-([^ ]+)/ );
 		return match[ 0 ];
@@ -9,10 +9,6 @@
 		$elements.each( function () {
 			var match = getAnnotationType( this );
 			match && types.push( match );
-		} );
-
-		types = types.filter( function ( value ) {
-			return value !== 'ffn-ann-FEE';
 		} );
 
 		return types;
@@ -43,8 +39,8 @@
 	function toggleFiltering() {
 		var types;
 
-		this.classList.toggle( 'ffn-filter' );
-		$( '.ffn-hide' ).removeClass( 'ffn-hide' );
+		$( this ).toggleClass( 'ffn-filter' );
+		$( '.ffn-sentences .ffn-hide' ).removeClass( 'ffn-hide' );
 
 		types = getTypes( $( '.ffn-typelist .ffn-filter' ) );
 		if ( types.length === 0 ) {
@@ -70,20 +66,74 @@
 		} );
 	}
 
-	function init() {
-		var $annToggle;
+	function addButtons( $content ) {
+		var $actions = $content.find( '.ffn-actions' );
 
+		$( '<button>' )
+			.text( mw.message( 'ffn-actions--annotations' ).text() )
+			.addClass( 'mw-ui-button mw-ui-progressive' )
+			.click( function () {
+				$( '.ffn-sentences' ).toggleClass( 'ffn-show-anns' );
+			} )
+			.appendTo( $actions );
+
+		$( '<button>' )
+			.text( mw.message( 'ffn-actions--toc' ).text() )
+			.addClass( 'mw-ui-button mw-ui-progressive' )
+			.click( function () {
+				$( '.ffn-toc' ).toggleClass( 'ffn-hide' );
+			} )
+			.appendTo( $actions );
+
+		$content.prepend( $actions );
+	}
+
+	function replaceAll( str, mapObj ) {
+		var re = new RegExp( Object.keys( mapObj ).join( '|' ), 'gi' );
+
+		return str.replace( re, function ( m ) {
+			return mapObj[ m ];
+		} );
+	}
+
+	function addLexicalUnitSearchLinks( $headings ) {
+		var conf, ns;
+
+		conf = mw.config.get( [ 'wgFormattedNamespaces', 'wgNamespaceNumber' ] );
+		ns = conf.wgFormattedNamespaces[ conf.wgNamespaceNumber ];
+
+		$headings.each( function () {
+			var url, $link, lu = $( this ).text();
+
+			url = new mw.Title( 'Special:Ask' ).getUrl( {
+				q: replaceAll( '[[Category:0]] [[FrameNet:Has lexical unit::1]]', [ ns, lu ] ),
+				'p[format]': 'ul',
+				'p[link]': 'none',
+				'p[limit]': 500,
+				'p[template]': 'FFN/Search result',
+				'p[userparam]': lu
+			} );
+
+			$link = $( '<a>' )
+				.prop( {
+					href: url,
+					title: mw.message( 'ffn-search-lus' ).text()
+				} )
+				.text( '🔎' );
+
+			$( this ).append( ' ', $link );
+		} );
+	}
+
+	function init() {
 		$( '#mw-content-text' ).on( 'mouseenter mouseleave', '.ffn-fe', onMouseEvent );
 		$( '.ffn-typelist .ffn-fe' ).on( 'click', toggleFiltering );
 		$( '.ffn-typelist' ).stick_in_parent();
 
-		$annToggle = $( '<button>' )
-			.text( 'Annotations' )
-			.addClass( 'mw-ui-button mw-ui-progressive' )
-			.click( function () {
-				$( '.ffn-sentences' ).toggleClass( 'ffn-show-anns' );
-			} );
-		$( '.ffn-typelist' ).append( $annToggle );
+		if ( mw.config.get( 'wgAction' ) === 'view' ) {
+			mw.hook( 'wikipage.content' ).add( addButtons );
+			addLexicalUnitSearchLinks( $( '.ffn-sentences > h2' ) );
+		}
 	}
 
 	if ( document.readyState === 'interactive' ) {
@@ -91,4 +141,4 @@
 	} else {
 		$( init );
 	}
-}( jQuery ) );
+}( jQuery, mediaWiki ) );

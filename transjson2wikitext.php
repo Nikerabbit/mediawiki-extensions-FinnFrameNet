@@ -37,7 +37,7 @@ function stringify( array $linearDoc ) {
 		if ( $numLayers === 1 ) {
 			$string .= "{{FFN/P|$text}} ";
 		} else {
-			$classes = implode( ';', $segment );
+			$classes = str_replace( ' ', '_', implode( ';', $segment ) );
 			if ( $translation ) {
 				$string .= "{{FFN/T|$classes|$text|$translation}} ";
 			} else {
@@ -106,9 +106,23 @@ function process( $IN, $OUT ) {
 			}
 		}
 
+		ksort( $sections );
+		$pages[$page] = $sections;
+
+	}
+
+	$longpage = $pages['TransFrameNet:Self_motion'];
+	unset( $pages['TransFrameNet:Self_motion'] );
+	$newpages = array_chunk( $longpage, 44, true );
+	foreach ( $newpages as $i => $newpage ) {
+		$j = $i + 1;
+		$pages["TransFrameNet:Self_motion ($j)"] = $newpage;
+	}
+
+	foreach ( $pages as $page => $sections ) {
 		$contents = '';
 		foreach ( $sections as $section => $entries ) {
-			$contents .= "== $section ==\n";
+			$contents .= "== [[FrameNet:Has lexical unit::$section]] ==\n";
 			foreach ( $entries as $entry ) {
 				$contents .= "* $entry\n";
 			}
@@ -118,6 +132,6 @@ function process( $IN, $OUT ) {
 		$contents = "{{FFN\n|types=\n$types\n|contents=\n$contents}}";
 
 		$page = strtr( $page, '_', ' ' );
-		file_put_contents( "entrypages/$page", $contents );
+		file_put_contents( "$OUT/$page", $contents );
 	}
 }

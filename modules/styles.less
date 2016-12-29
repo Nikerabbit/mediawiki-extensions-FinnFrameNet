@@ -12,13 +12,53 @@
 	margin-bottom: -0.5ex;
 }
 
-.ffn-ann-FEE {
+.ffn-ann-FEE,
+.ffn-ann-FEEM {
 	font-variant: small-caps;
 	font-weight: bold;
 }
 
+.ffn-actions {
+	text-align: center;
+	min-height: 60px;
+
+	> button {
+		margin: 1em;
+	}
+}
+
+.client-nojs .ffn-actions {
+	display: none;
+}
+
+.ffn-columns {
+	display: flex;
+	justify-content: space-between;
+}
+
+.ffn-multiline {
+	display: inline-block;
+	vertical-align: top;
+
+	&__wrap {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.ffn-toc {
+	border-right: 2px dashed gray;
+	padding: 0 1em 0 0;
+	margin-right: 1em;
+}
+
+.client-nojs .ffn-toc.ffn-hide {
+	display: block;
+}
+
 .ffn-typelist {
-	font-size: 120%;
+	min-width: 175px;
+	font-size: 100%;
 	border-left: 2px dashed gray;
 	padding: 0 1em;
 	margin-left: 1em;
@@ -29,10 +69,16 @@
 }
 
 .ffn-sentences {
+	min-width: 200px;
 	font-size: 120%;
 
 	li {
 		margin-bottom: 0.3em;
+	}
+
+	& > h2:first-child  {
+		margin-top: 0;
+		padding-top: 0;
 	}
 }
 
@@ -48,13 +94,16 @@
 }
 
 .ffn-show-anns .ffn-fe::before,
-.ffn-show-anns .ffn-fe::after {
+.ffn-show-anns .ffn-fe::after,
+.client-nojs .ffn-sentences .ffn-fe::before,
+.client-nojs .ffn-sentences .ffn-fe::after {
 	position: relative;
 	font-variant: small-caps;
 	font-size: 80%;
 	bottom: -0.5ex;
 }
 
-.ffn-show-anns .ffn-fe::after {
+.ffn-show-anns .ffn-fe::after,
+.client-nojs .ffn-sentences .ffn-fe::after {
 	content: " ]";
 }

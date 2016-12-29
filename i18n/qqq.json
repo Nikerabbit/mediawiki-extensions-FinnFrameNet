@@ -1,4 +1,6 @@
 {
-	"ffn-search-lus": "Tooltip for search icon",
-	"ffn-fe-help": "Link text for link that goes to an element type description page"
+	"ffn-search-lus": "Tooltip for search icon. {{ffn-example-page}}",
+	"ffn-actions--annotations": "Button text. {{ffn-example-page}}",
+	"ffn-actions--toc": "Button text. {{ffn-example-page}}",
+	"ffn-fe-help": "Link text for link that goes to an element type description page. {{ffn-example-page}}"
 }

@@ -30,7 +30,8 @@ function parse( $string ) {
 	$matches = [];
 
 	$string = preg_replace( '~\R~u', "\n", $string );
-	$parts = explode( "\n,,,,,\n", $string );
+
+	$parts = preg_split( "/\n,\s*,\s*,\s*,\s*,\n/", $string );
 
 	foreach ( $parts as $part ) {
 		$attributes = parseAttributes( $part );
@@ -41,6 +42,8 @@ function parse( $string ) {
 				return $x !== '';
 			} );
 		}
+
+		$columns[2] = array_map( 'strtolower', $columns[2] );
 
 		$output[] = [
 			array_values( $attributes ),

@@ -14,6 +14,9 @@
 		"BeforePageDisplay": "FinnFrameNet\\Hooks::onBeforePageDisplay",
 		"ContentAlterParserOutput": "FinnFrameNet\\Hooks::onContentAlterParserOutput"
 	},
+	"MessagesDirs": {
+		"FFN": "i18n"
+	},
 	"ResourceModules": {
 		"ext.finnframenet": {
 			"scripts": "main.js",
@@ -22,6 +25,11 @@
 			"dependencies": [
 				"jquery.stickykit",
 				"mediawiki.ui.button"
+			],
+			"messages": [
+				"ffn-search-lus",
+				"ffn-actions--annotations",
+				"ffn-actions--toc"
 			]
 		},
 		"ext.finnframenet.styles": {
