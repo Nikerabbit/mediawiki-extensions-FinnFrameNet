@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"ffn-desc": "Viser FinnFrameNet og TransFrameNet i wikiformat",
+	"ffn-search-lus": "Søk etter andre rammer med denne leksikalske enheten",
+	"ffn-actions--annotations": "Annoteringer",
+	"ffn-actions--toc": "Innholdsfortegnelse",
+	"ffn-fe-help": "(info)"
+}

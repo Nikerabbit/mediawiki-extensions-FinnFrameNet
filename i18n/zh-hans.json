@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liuxinyu970226"
+		]
+	},
+	"ffn-desc": "以wiki格式显示FinnFrameNet和TransFrameNet",
+	"ffn-search-lus": "搜索其他包含此词位的框架",
+	"ffn-actions--annotations": "附注",
+	"ffn-actions--toc": "目录",
+	"ffn-fe-help": "（信息）"
+}

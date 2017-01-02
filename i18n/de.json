@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Metalhead64"
+		]
+	},
+	"ffn-desc": "Zeigt FinnFrameNet und TransFrameNet in einem Wikiformat an",
+	"ffn-search-lus": "Sucht andere Bilder, die diese lexikalische Einheit enthalten.",
+	"ffn-actions--annotations": "Anmerkungen",
+	"ffn-actions--toc": "Inhaltsverzeichnis",
+	"ffn-fe-help": "(Information)"
+}

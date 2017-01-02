@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Piramidion"
+		]
+	},
+	"ffn-desc": "Відтворює FinnFrameNet і TransFrameNet у вікіформаті",
+	"ffn-search-lus": "Пошук інших конструкцій, що містять цю лексичну одиницю",
+	"ffn-actions--annotations": "Анотації",
+	"ffn-actions--toc": "Зміст",
+	"ffn-fe-help": "(інформація)"
+}
