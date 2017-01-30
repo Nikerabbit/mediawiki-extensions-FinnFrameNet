@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Aftabuzzaman"
+			"Aftabuzzaman",
+			"Elias Ahmmad"
 		]
 	},
-	"ffn-actions--annotations": "টীকা রচনা",
+	"ffn-actions--annotations": "টীকা",
 	"ffn-actions--toc": "সূচিপত্র",
 	"ffn-fe-help": "(তথ্য)"
 }
