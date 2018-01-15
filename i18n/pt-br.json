@@ -1,9 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Felipe L. Ewald"
+			"Felipe L. Ewald",
+			"Eduardo Addad de Oliveira"
 		]
 	},
+	"ffn-desc": "Apresenta FinnFrameNet e TransFrameNet num formato wiki",
+	"ffn-search-lus": "Pesquisar outros frames que contenham esta unidade lexical",
 	"ffn-actions--annotations": "Anotações",
+	"ffn-actions--toc": "Índice de informações",
 	"ffn-fe-help": "(info)"
 }
