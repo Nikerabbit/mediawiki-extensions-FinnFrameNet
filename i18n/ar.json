@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"ديفيد"
+		]
+	},
+	"ffn-desc": "يعرض FinnFrameNet وTransFrameNet بتنسيق ويكي",
+	"ffn-search-lus": "البحث في إطارات أخرى تحتوي على هذه الوحدة المعجمية",
+	"ffn-actions--annotations": "الشروح",
+	"ffn-actions--toc": "جدول المحتويات",
+	"ffn-fe-help": "(معلومات)"
+}
