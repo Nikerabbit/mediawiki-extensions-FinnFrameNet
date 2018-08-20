@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Otokoume",
+			"Suyama"
+		]
+	},
+	"ffn-desc": "FinnFrameNet および TransFrameNet をウィキ形式で表示する",
+	"ffn-actions--toc": "目次"
+}
