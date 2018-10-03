@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Banjo",
-			"Elisardojm"
+			"Elisardojm",
+			"Navhy"
 		]
 	},
 	"ffn-desc": "Amosa FinnFrameNet e TransFrameNet con formato wiki",
-	"ffn-search-lus": "Buscar outras estruturas que conteñan esta unidade léxica",
+	"ffn-search-lus": "Procurar outras estruturas que conteñan esta unidade léxica",
 	"ffn-actions--annotations": "Anotacións",
 	"ffn-actions--toc": "Táboa de contidos",
 	"ffn-fe-help": "(info)"
