@@ -6,7 +6,7 @@
 	],
 	"url": "https://github.com/Nikerabbit/mediawiki-extensions-FinnFrameNet",
 	"description": "Code to import and display FinnFrameNet and TransFrameNet in a MediaWiki",
-	"license-name": "GPL-2.0+",
+	"license-name": "GPL-2.0-or-later",
 	"AutoloadClasses": {
 		"FinnFrameNet\\Hooks": "Hooks.php"
 	},
