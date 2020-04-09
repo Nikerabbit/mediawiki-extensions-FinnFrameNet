@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liuxinyu970226",
-			"Kly"
+			"Kly",
+			"Liuxinyu970226"
 		]
 	},
 	"ffn-desc": "以 wiki 格式顯示 FinnFrameNet 與 TransFrameNet",

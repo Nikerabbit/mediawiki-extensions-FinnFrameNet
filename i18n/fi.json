@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"ffn-desc": "Näyttää FinnFrameNetin ja TransFrameNetin wikimuodossa",
 	"ffn-search-lus": "Etsi tätä leksikaalista yksikköä toisista kehysistä",
 	"ffn-actions--annotations": "Annotaatiot",

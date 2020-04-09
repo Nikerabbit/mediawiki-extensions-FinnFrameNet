@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Fitoschido",
 			"Fortega",
-			"Macofe",
-			"Fitoschido"
+			"Macofe"
 		]
 	},
 	"ffn-desc": "Muestra FinnFrameNet y TransFrameNet con formato wiki",
