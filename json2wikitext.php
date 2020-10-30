@@ -9,7 +9,7 @@ process( $IN, $OUT );
 
 function parseEntry( array $entry ) {
 	// LU = Lexical Unit
-	list( $frame, $enLu, $fiLU ) = $entry[0];
+	list( $frame, , $fiLU ) = $entry[0];
 
 	$sentence = splitMultiPart( $entry[1] );
 	$linearDoc = linearize( $sentence );
@@ -88,7 +88,7 @@ function mergeSegments( array $linearDoc ) {
 
 			// Handle space, first check if there is one unprocessed
 			if ( $index - $mergeEnd === 2 ) {
-				if ( areCompatible( $linearDoc[ $index -1 ], $segment ) ) {
+				if ( areCompatible( $linearDoc[ $index - 1 ], $segment ) ) {
 					// Move mergeStart backwards to include space
 					$mergeStart = $index - 1;
 				} else {
@@ -124,8 +124,8 @@ function areCompatible( array $a, array $b ) {
 	return $a == $b;
 }
 
-// Split multi-part words such as "Tuomitse|t|ko"
 function splitMultiPart( $sentence ) {
+	// Split multi-part words such as "Tuomitse|t|ko"
 	$copy = [];
 	$copyIndex = 0;
 
@@ -149,7 +149,7 @@ function splitMultiPart( $sentence ) {
 				$delta = count( $segments );
 				// For punctuation, overwrite previous space
 				if ( preg_match( '/^[.,?!:;]$/', $word ) ) {
-					$copyIndex = max( 0, $copyIndex -1 );
+					$copyIndex = max( 0, $copyIndex - 1 );
 				}
 			}
 
@@ -165,7 +165,7 @@ function splitMultiPart( $sentence ) {
 		$copy[ 0 ][ $copyIndex++ ] = ' ';
 	}
 
-	// Remove last superflous space
+	// Remove last superfluous space
 	unset( $copy[ 0 ][ $copyIndex - 1 ] );
 
 	return $copy;
@@ -213,10 +213,10 @@ function process( $IN, $OUT ) {
 			$sections['???'] = $temp;
 		}
 
-		foreach ( $sections as $section => $entries ) {
+		foreach ( $sections as $section => $items ) {
 			$contents .= "== [[FrameNet:Has lexical unit::$section]] ==\n";
-			foreach ( $entries as $entry ) {
-				$contents .= "* $entry\n";
+			foreach ( $items as $item ) {
+				$contents .= "* $item\n";
 			}
 		}
 

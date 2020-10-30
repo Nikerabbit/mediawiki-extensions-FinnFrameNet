@@ -27,7 +27,6 @@ function process( $IN, $OUT ) {
 
 function parse( $string ) {
 	$output = [];
-	$matches = [];
 
 	$string = preg_replace( '~\R~u', "\n", $string );
 
@@ -55,7 +54,6 @@ function parse( $string ) {
 }
 
 function parseAttributes( $string ) {
-	$output = [];
 	$matches = [];
 	if ( !preg_match( '/^# item,([^,]+),([^,]+)/m', $string, $matches ) ) {
 		var_dump( $string );

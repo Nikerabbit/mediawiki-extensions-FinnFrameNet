@@ -1,6 +1,6 @@
 {
 	"name": "FinnFrameNet",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"author": [
 		"Niklas Laxström"
 	],
@@ -43,5 +43,5 @@
 			"remoteExtPath": "FinnFrameNet/libs"
 		}
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }

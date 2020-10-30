@@ -1,9 +1,9 @@
 <?php
 
-require "vendor/autoload.php";
+require __DIR__ . '/vendor/autoload.php';
 
-use GuzzleHttp\Pool;
 use GuzzleHttp\Client;
+use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
 
 function main() {
@@ -63,7 +63,7 @@ function downloadDescriptions( array $elements ) {
 				] );
 			}
 		},
-		'rejected' => function ( $reason, $index ) {
+		'rejected' => function ( $reason, $index ) use ( $elements ) {
 			$url = $elements[$index]['url'];
 			echo "\nFailed to download $url: $reason\n";
 		},
@@ -73,7 +73,7 @@ function downloadDescriptions( array $elements ) {
 	$promise = $pool->promise();
 
 	// Force the pool of requests to complete.
-	$responses = $promise->wait();
+	$promise->wait();
 
 	echo "\n";
 
@@ -92,19 +92,9 @@ function parseDescriptionPage( $html ) {
 	preg_match( '~TYYPPI: (.*)~', $html, $type );
 	$parsed['type'] = $type[1];
 
-	if ( !isset( $type[1] ) ) {
-		# var_dump( $html );
-	}
-
 	preg_match( '~(<h2>.*)</div><!-- /patternTopic--~s', $html, $match );
 	$content = $match[1];
 	$content = preg_replace( '~-- <a.*~s', '', $content );
-
-	if ( !isset( $match[1] ) ) {
-		# var_dump( $html, 'NOMATCH' );
-		# die();
-	}
-
 	$content = preg_replace( '~<p />|</?ul>~', '', $content );
 	$content = preg_replace( '~<li>\s+(.*)\s+</li>~sU', "\\1\n", $content );
 	$content = str_replace( 'Esiintyy kehyksissä:', '', $content );

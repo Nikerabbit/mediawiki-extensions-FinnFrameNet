@@ -62,7 +62,6 @@ function parseAttributes( $string ) {
 }
 
 function parseSentences( $string ) {
-	$output = [];
 	$matches = [];
 	preg_match_all( '~^(.+)\t(.+)\t(.+)\t(.+)\t(.+)$~m', $string, $matches );
 
