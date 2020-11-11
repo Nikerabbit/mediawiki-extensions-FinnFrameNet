@@ -1,11 +1,4 @@
 <?php
-/**
- * Hooks.
- *
- * @file
- * @author Niklas Laxström
- * @license GPL-2.0-or-later
- */
 
 namespace FinnFrameNet;
 
@@ -14,6 +7,10 @@ use OutputPage;
 use ParserOutput;
 use Title;
 
+/**
+ * @author Niklas Laxström
+ * @license GPL-2.0-or-later
+ */
 class Hooks {
 	private static $colors = [
 		'#452a74',

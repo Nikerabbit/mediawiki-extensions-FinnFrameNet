@@ -173,7 +173,7 @@ function splitMultiPart( $sentence ) {
 
 function collectTypes( $input ) {
 	$types = [];
-	preg_match_all( '~\{\{FFN/E\|([^|]+)~', $input, $matches );
+	preg_match_all( '~{{FFN/E\|([^|]+)~', $input, $matches );
 	foreach ( $matches[1] as $match ) {
 		foreach ( explode( ';', $match ) as $type ) {
 			$types[$type] = true;
