@@ -1,6 +1,6 @@
 {
 	"name": "FinnFrameNet",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"author": [
 		"Niklas Laxström"
 	],
@@ -30,17 +30,20 @@
 				"ffn-search-lus",
 				"ffn-actions--annotations",
 				"ffn-actions--toc"
-			]
+			],
+			"targets": [ "desktop", "mobile" ]
 		},
 		"ext.finnframenet.styles": {
 			"styles": "styles.less",
 			"localBasePath": "modules",
-			"remoteExtPath": "FinnFrameNet/modules"
+			"remoteExtPath": "FinnFrameNet/modules",
+			"targets": [ "desktop", "mobile" ]
 		},
 		"jquery.stickykit": {
 			"scripts": "jquery.sticky-kit.js",
 			"localBasePath": "libs",
-			"remoteExtPath": "FinnFrameNet/libs"
+			"remoteExtPath": "FinnFrameNet/libs",
+			"targets": [ "desktop", "mobile" ]
 		}
 	},
 	"manifest_version": 2
