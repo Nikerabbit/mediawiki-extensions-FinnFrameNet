@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"ffn-desc": "Prikaz FinnFrameNet i TransFrameNet u viki formatu",
+	"ffn-search-lus": "Pretraga drugih frejmova sa ovom leksičkom jedinicom",
+	"ffn-actions--annotations": "Zabeleške",
+	"ffn-actions--toc": "Sadržaj",
+	"ffn-fe-help": "(info)"
+}
