@@ -4,6 +4,8 @@
 			"Eleassar"
 		]
 	},
+	"ffn-desc": "Prikaže FinnFrameNet in TransFrameNet v viki formatu",
+	"ffn-search-lus": "Preišče druge stran, ki vsebujejo to leksikalno enoto",
 	"ffn-actions--annotations": "Oznake",
 	"ffn-actions--toc": "Kazalo vsebine",
 	"ffn-fe-help": "(informacije)"
