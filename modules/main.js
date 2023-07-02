@@ -77,14 +77,6 @@
 			} )
 			.appendTo( $actions );
 
-		$( '<button>' )
-			.text( mw.message( 'ffn-actions--toc' ).text() )
-			.addClass( 'mw-ui-button mw-ui-progressive' )
-			.click( function () {
-				$( '.ffn-toc' ).toggleClass( 'ffn-hide' );
-			} )
-			.appendTo( $actions );
-
 		$content.prepend( $actions );
 	}
 

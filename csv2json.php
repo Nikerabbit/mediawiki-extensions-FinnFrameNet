@@ -2,8 +2,8 @@
 
 ini_set( 'memory_limit', '2G' );
 
-$IN = isset( $argv[1] ) ? $argv[1] : 'transframe/data-sep-2015/';
-$OUT = isset( $argv[2] ) ? $argv[2] : 'transframenet.json';
+$IN = $argv[1] ?? 'transframe/data-sep-2015/';
+$OUT = $argv[2] ?? 'transframenet.json';
 process( $IN, $OUT );
 
 function process( $IN, $OUT ) {
@@ -25,7 +25,7 @@ function process( $IN, $OUT ) {
 	echo " ^__^\n";
 }
 
-function parse( $string ) {
+function parse( $string ): array {
 	$output = [];
 
 	$string = preg_replace( '~\R~u', "\n", $string );
@@ -37,7 +37,7 @@ function parse( $string ) {
 
 		$columns = parseSentences( $part );
 		for ( $i = 1; $i < 4; $i++ ) {
-			$columns[$i] = array_filter( $columns[$i], function ( $x ) {
+			$columns[$i] = array_filter( $columns[$i], static function ( $x ) {
 				return $x !== '';
 			} );
 		}
@@ -66,7 +66,7 @@ function parseAttributes( $string ) {
 	];
 }
 
-function parseSentences( $string ) {
+function parseSentences( $string ): array {
 	$output = [];
 
 	$lines = explode( "\n", $string );
@@ -86,7 +86,5 @@ function parseSentences( $string ) {
 	$main = $output[5];
 	unset( $output[5] );
 	array_unshift( $output, $main );
-	$output = array_values( $output );
-
-	return $output;
+	return array_values( $output );
 }

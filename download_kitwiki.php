@@ -11,17 +11,17 @@ function main() {
 	downloadDescriptions( $elements );
 }
 
-function getElements() {
+function getElements(): array {
 	return parseElements( downloadElements() );
 }
 
-function downloadElements() {
+function downloadElements(): string {
 	$client = new Client();
 	$response = $client->get( 'https://kitwiki.csc.fi/twiki/bin/view/KitWiki/FrameNetElements' );
 	return $response->getBody()->getContents();
 }
 
-function parseElements( $html ) {
+function parseElements( $html ): array {
 	// Consume all html attributes.
 	$c = '[^<>]+';
 	$re = "~<td$c>\s*<a href=\"([^\"]+)\"$c>($c)</a>\s*</td>\s*<td$c>($c)</td>~";
@@ -51,7 +51,7 @@ function downloadDescriptions( array $elements ) {
 
 	$pool = new Pool( $client, $requests, [
 		'concurrency' => 5,
-		'fulfilled' => function ( $response, $index ) use ( &$elements ) {
+		'fulfilled' => static function ( $response, $index ) use ( &$elements ) {
 			# echo [ 'O', 'o' ][ mt_rand( 0, 1 ) ];
 			$body = $response->getBody()->getContents();
 			$elements[$index]['description'] = parseDescriptionPage( $body );
@@ -63,7 +63,7 @@ function downloadDescriptions( array $elements ) {
 				] );
 			}
 		},
-		'rejected' => function ( $reason, $index ) use ( $elements ) {
+		'rejected' => static function ( $reason, $index ) use ( $elements ) {
 			$url = $elements[$index]['url'];
 			echo "\nFailed to download $url: $reason\n";
 		},
@@ -84,7 +84,7 @@ function downloadDescriptions( array $elements ) {
 	file_put_contents( 'descriptions.json', $json );
 }
 
-function parseDescriptionPage( $html ) {
+function parseDescriptionPage( $html ): array {
 	$parsed = [];
 
 	$html = mb_convert_encoding( $html, 'UTF-8', 'ISO-8859-1' );

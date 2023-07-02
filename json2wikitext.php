@@ -2,14 +2,14 @@
 
 ini_set( 'memory_limit', '2G' );
 
-$IN = isset( $argv[1] ) ? $argv[1] : 'finnframenet.json';
-$OUT = isset( $argv[2] ) ? $argv[2] : 'entrypages';
+$IN = $argv[1] ?? 'finnframenet.json';
+$OUT = $argv[2] ?? 'entrypages';
 
 process( $IN, $OUT );
 
-function parseEntry( array $entry ) {
+function parseEntry( array $entry ): array {
 	// LU = Lexical Unit
-	list( $frame, , $fiLU ) = $entry[0];
+	[ $frame, , $fiLU ] = $entry[0];
 
 	$sentence = splitMultiPart( $entry[1] );
 	$linearDoc = linearize( $sentence );
@@ -29,7 +29,7 @@ function parseEntry( array $entry ) {
 	return [ "FinnFrameNet:$frame" => [ $fiLU => $text ] ];
 }
 
-function stringify( array $linearDoc ) {
+function stringify( array $linearDoc ): string {
 	$string = '';
 
 	foreach ( $linearDoc as $segment ) {
@@ -45,7 +45,7 @@ function stringify( array $linearDoc ) {
 	return $string;
 }
 
-function linearize( array $sentence ) {
+function linearize( array $sentence ): array {
 	$linearDoc = [];
 
 	$columns = count( $sentence );
@@ -70,7 +70,7 @@ function linearize( array $sentence ) {
 	return $linearDoc;
 }
 
-function mergeSegments( array $linearDoc ) {
+function mergeSegments( array $linearDoc ): array {
 	$mergedLinearDoc = [];
 	$mergeStart = 0;
 	$mergeEnd = 0;
@@ -117,15 +117,15 @@ function composeMergeSegment( $doc, $start, $end ) {
 	return $segment;
 }
 
-function areCompatible( array $a, array $b ) {
+function areCompatible( array $a, array $b ): bool {
 	// Ignore text layer
 	array_shift( $a );
 	array_shift( $b );
 	return $a == $b;
 }
 
-function splitMultiPart( $sentence ) {
-	// Split multi-part words such as "Tuomitse|t|ko"
+function splitMultiPart( $sentence ): array {
+	// Split multipart words such as "Tuomitse|t|ko"
 	$copy = [];
 	$copyIndex = 0;
 
@@ -171,7 +171,7 @@ function splitMultiPart( $sentence ) {
 	return $copy;
 }
 
-function collectTypes( $input ) {
+function collectTypes( $input ): array {
 	$types = [];
 	preg_match_all( '~{{FFN/E\|([^|]+)~', $input, $matches );
 	foreach ( $matches[1] as $match ) {

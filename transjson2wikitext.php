@@ -2,14 +2,14 @@
 
 ini_set( 'memory_limit', '2G' );
 
-$IN = isset( $argv[1] ) ? $argv[1] : 'transframenet.json';
-$OUT = isset( $argv[2] ) ? $argv[2] : 'entrypages';
+$IN = $argv[1] ?? 'transframenet.json';
+$OUT = $argv[2] ?? 'entrypages';
 
 process( $IN, $OUT );
 
-function parseEntry( array $entry ) {
+function parseEntry( array $entry ): array {
 	// LU = Lexical Unit
-	list( $frame, $LU ) = $entry[0];
+	[ $frame, $LU ] = $entry[0];
 
 	$linearDoc = linearize( $entry[1] );
 	$text = stringify( $linearDoc );
@@ -25,12 +25,12 @@ function parseEntry( array $entry ) {
 	return [ "TransFrameNet:$frame" => [ $LU => $text ] ];
 }
 
-function stringify( array $linearDoc ) {
+function stringify( array $linearDoc ): string {
 	$string = '';
 
 	foreach ( $linearDoc as $segment ) {
 		$numLayers = count( $segment );
-		$translation = isset( $segment[3] ) ? $segment[3] : false;
+		$translation = $segment[3] ?? false;
 		unset( $segment[3] );
 		$text = array_shift( $segment );
 
@@ -48,7 +48,7 @@ function stringify( array $linearDoc ) {
 	return trim( $string );
 }
 
-function linearize( array $sentence ) {
+function linearize( array $sentence ): array {
 	$linearDoc = [];
 
 	$columns = count( $sentence );
@@ -73,7 +73,7 @@ function linearize( array $sentence ) {
 	return $linearDoc;
 }
 
-function collectTypes( $input ) {
+function collectTypes( $input ): array {
 	$types = [];
 	preg_match_all( '~{{FFN/T\|([^|]+)~', $input, $matches );
 	foreach ( $matches[1] as $match ) {

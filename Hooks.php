@@ -12,7 +12,7 @@ use Title;
  * @license GPL-2.0-or-later
  */
 class Hooks {
-	private static $colors = [
+	private static array $colors = [
 		'#452a74',
 		'#832f1b',
 		'#882554',
@@ -50,7 +50,7 @@ class Hooks {
 		'#9ac859'
 	];
 
-	public static function onBeforePageDisplay( OutputPage $out ) {
+	public static function onBeforePageDisplay( OutputPage $out ): void {
 		if ( $out->getTitle()->inNamespaces( NS_FINNFRAMENET, NS_TRANSFRAMENET ) ) {
 			$out->addModules( 'ext.finnframenet' );
 			$out->addModuleStyles( 'ext.finnframenet.styles' );
@@ -61,7 +61,7 @@ class Hooks {
 		$content,
 		Title $title,
 		ParserOutput $po
-	) {
+	): void {
 		if ( $title->inNamespaces( NS_FINNFRAMENET, NS_TRANSFRAMENET ) ) {
 			$text = $content->getNativeData();
 			if ( preg_match( '/types\s*=\s*([^|]+)\|/', $text, $match ) ) {
@@ -72,7 +72,7 @@ class Hooks {
 		}
 	}
 
-	private static function getCSS( $types ) {
+	private static function getCSS( array $types ): string {
 		$css = [];
 		$len = count( $types );
 

@@ -2,8 +2,8 @@
 
 ini_set( 'memory_limit', '2G' );
 
-$IN = isset( $argv[1] ) ? $argv[1] : 'finframenet-beta';
-$OUT = isset( $argv[2] ) ? $argv[2] : 'finnframenet.json';
+$IN = $argv[1] ?? 'finframenet-beta';
+$OUT = $argv[2] ?? 'finnframenet.json';
 process( $IN, $OUT );
 
 function process( $IN, $OUT ) {
@@ -25,7 +25,7 @@ function process( $IN, $OUT ) {
 	echo " ^__^\n";
 }
 
-function parse( $string ) {
+function parse( $string ): array {
 	$output = [];
 	$matches = [];
 	preg_match_all( '~<sentence (.+)>\n(.+)\n</sentence>~sU', $string, $matches, PREG_SET_ORDER );
@@ -36,7 +36,7 @@ function parse( $string ) {
 
 		$columns = parseSentences( $sentence[2] );
 		for ( $i = 1; $i < 4; $i++ ) {
-			$columns[$i] = array_filter( $columns[$i], function ( $x ) {
+			$columns[$i] = array_filter( $columns[$i], static function ( $x ) {
 				return $x !== '_';
 			} );
 		}
@@ -50,7 +50,7 @@ function parse( $string ) {
 	return $output;
 }
 
-function parseAttributes( $string ) {
+function parseAttributes( $string ): array {
 	$output = [];
 	$matches = [];
 	preg_match_all( '~([a-z]+)="([^"]*)"~', $string, $matches, PREG_SET_ORDER );
@@ -61,7 +61,7 @@ function parseAttributes( $string ) {
 	return $output;
 }
 
-function parseSentences( $string ) {
+function parseSentences( $string ): array {
 	$matches = [];
 	preg_match_all( '~^(.+)\t(.+)\t(.+)\t(.+)\t(.+)$~m', $string, $matches );
 

@@ -1,11 +1,11 @@
 <?php
 
-$IN = isset( $argv[1] ) ? $argv[1] : 'descriptions.json';
-$OUT = isset( $argv[2] ) ? $argv[2] : 'entrypages';
+$IN = $argv[1] ?? 'descriptions.json';
+$OUT = $argv[2] ?? 'entrypages';
 
 process( $IN, $OUT );
 
-function parseEntry( $frame, array $entry ) {
+function parseEntry( $frame, array $entry ): array {
 	$output = [
 		'name' => $frame,
 		'type' => $entry['description']['type'],
@@ -15,7 +15,7 @@ function parseEntry( $frame, array $entry ) {
 	return [ "FrameNet/$frame" => $output ];
 }
 
-function formatEntry( array $templateData ) {
+function formatEntry( array $templateData ): string {
 	$fmt = "{{FFN/Element page\n";
 	foreach ( $templateData as $k => $v ) {
 		$fmt .= "|$k=$v\n";
