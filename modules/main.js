@@ -58,7 +58,7 @@
 				show = show && $s.find( '.' + types[ i ] ).length;
 			}
 
-			if ( show ) {
+			if ( !show ) {
 				$s.addClass( 'ffn-hide' );
 			}
 		} );
