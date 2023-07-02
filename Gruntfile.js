@@ -1,35 +1,39 @@
-/* eslint-env node */
+'use strict';
+
 module.exports = function ( grunt ) {
-	'use strict';
+	const conf = grunt.file.readJSON( 'extension.json' );
 
 	grunt.loadNpmTasks( 'grunt-eslint' );
-	grunt.loadNpmTasks( 'grunt-jsonlint' );
+	grunt.loadNpmTasks( 'grunt-banana-checker' );
+	grunt.loadNpmTasks( 'grunt-stylelint' );
 
 	grunt.initConfig( {
 		eslint: {
-			fix: {
-				options: {
-					fix: true
-				},
-				src: '<%= eslint.main %>'
+			options: {
+				cache: true,
+				fix: grunt.option( 'fix' )
 			},
-			main: [
+			all: [
 				'**/*.js',
-				'!node_modules/**',
-				'!vendor/**',
-				'!libs/**'
+				'!{vendor,node_modules,libs,i18n}/**'
 			]
 		},
-		jsonlint: {
+		stylelint: {
 			all: [
-				'**/*.json',
+				'**/*.css',
+				'**/*.less',
 				'!node_modules/**',
-				'!vendor/**',
-				'!libs/**'
+				'!vendor/**'
 			]
-		}
+		},
+
+		banana: Object.assign( conf.MessagesDirs, {
+			options: {
+				requireLowerCase: 'initial'
+			}
+		} )
 	} );
 
-	grunt.registerTask( 'test', [ 'eslint:main', 'jsonlint' ] );
+	grunt.registerTask( 'test', [ 'eslint', 'banana', 'stylelint' ] );
 	grunt.registerTask( 'default', 'test' );
 };

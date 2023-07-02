@@ -8,7 +8,9 @@
 		var types = [];
 		$elements.each( function () {
 			var match = getAnnotationType( this );
-			match && types.push( match );
+			if ( match ) {
+				types.push( match );
+			}
 		} );
 
 		return types;
@@ -56,7 +58,9 @@
 				show = show && $s.find( '.' + types[ i ] ).length;
 			}
 
-			show || $s.addClass( 'ffn-hide' );
+			if ( show ) {
+				$s.addClass( 'ffn-hide' );
+			}
 		} );
 
 		$( '.ffn-sentences h2' ).each( function () {
@@ -72,7 +76,7 @@
 		$( '<button>' )
 			.text( mw.message( 'ffn-actions--annotations' ).text() )
 			.addClass( 'mw-ui-button mw-ui-progressive' )
-			.click( function () {
+			.on( 'click', function () {
 				$( '.ffn-sentences' ).toggleClass( 'ffn-show-anns' );
 			} )
 			.appendTo( $actions );
@@ -133,4 +137,4 @@
 	} else {
 		$( init );
 	}
-}( jQuery, mediaWiki ) );
+}( $, mw ) );

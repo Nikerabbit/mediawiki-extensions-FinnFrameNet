@@ -76,7 +76,7 @@
 		margin-bottom: 0.3em;
 	}
 
-	& > h2:first-child  {
+	& > h2:first-child {
 		margin-top: 0;
 		padding-top: 0;
 	}
@@ -93,17 +93,17 @@
 	margin-left: -4px;
 }
 
-.ffn-show-anns .ffn-fe::before,
-.ffn-show-anns .ffn-fe::after,
-.client-nojs .ffn-sentences .ffn-fe::before,
-.client-nojs .ffn-sentences .ffn-fe::after {
-	position: relative;
-	font-variant: small-caps;
-	font-size: 80%;
-	bottom: -0.5ex;
-}
+.ffn-show-anns,
+.client-nojs .ffn-sentences {
+	& .ffn-fe::after {
+		content: ' ]';
+	}
 
-.ffn-show-anns .ffn-fe::after,
-.client-nojs .ffn-sentences .ffn-fe::after {
-	content: " ]";
+	& .ffn-fe::before,
+	& .ffn-fe::after {
+		position: relative;
+		font-variant: small-caps;
+		font-size: 80%;
+		bottom: -0.5ex;
+	}
 }

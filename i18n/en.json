@@ -1,4 +1,7 @@
 {
+	"@metadata": {
+		"authors": []
+	},
 	"ffn-desc": "Displays FinnFrameNet and TransFrameNet in a wiki format",
 	"ffn-search-lus": "Search other frames containing this lexical unit",
 	"ffn-actions--annotations": "Annotations",
