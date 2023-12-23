@@ -87,12 +87,12 @@ function collectTypes( $input ): array {
 	return $uniqueTypes;
 }
 
-function process( $IN, $OUT ) {
+function process( $IN, $OUT ): void {
 	is_dir( $OUT ) || mkdir( $OUT );
 	$data = json_decode( file_get_contents( $IN ), true );
 
 	$pages = [];
-	foreach ( $data as $index => $rawEntry ) {
+	foreach ( $data as $rawEntry ) {
 		foreach ( parseEntry( $rawEntry ) as $page => $value ) {
 			$pages[$page][] = $value;
 		}

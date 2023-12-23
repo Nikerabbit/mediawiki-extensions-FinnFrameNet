@@ -6,7 +6,7 @@ $IN = $argv[1] ?? 'transframe/data-sep-2015/';
 $OUT = $argv[2] ?? 'transframenet.json';
 process( $IN, $OUT );
 
-function process( $IN, $OUT ) {
+function process( $IN, $OUT ): void {
 	$all = [];
 
 	$iter = new DirectoryIterator( $IN );
@@ -42,7 +42,7 @@ function parse( $string ): array {
 			} );
 		}
 
-		$columns[2] = array_map( 'strtolower', $columns[2] );
+		$columns[2] = array_map( strtolower( ... ), $columns[2] );
 
 		$output[] = [
 			array_values( $attributes ),

@@ -1,6 +1,6 @@
 {
 	"name": "FinnFrameNet",
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"author": [
 		"Niklas Laxström"
 	],
@@ -10,9 +10,14 @@
 	"AutoloadClasses": {
 		"FinnFrameNet\\Hooks": "Hooks.php"
 	},
+	"HookHandlers": {
+		"main": {
+			"class": "FinnFrameNet\\Hooks"
+		}
+	},
 	"Hooks": {
-		"BeforePageDisplay": "FinnFrameNet\\Hooks::onBeforePageDisplay",
-		"ContentAlterParserOutput": "FinnFrameNet\\Hooks::onContentAlterParserOutput"
+		"BeforePageDisplay": "main",
+		"ContentAlterParserOutput": "main"
 	},
 	"MessagesDirs": {
 		"FFN": "i18n"

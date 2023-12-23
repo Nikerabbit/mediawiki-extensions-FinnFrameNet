@@ -6,7 +6,7 @@ $IN = $argv[1] ?? 'finframenet-beta';
 $OUT = $argv[2] ?? 'finnframenet.json';
 process( $IN, $OUT );
 
-function process( $IN, $OUT ) {
+function process( $IN, $OUT ): void {
 	$all = [];
 
 	$iter = new DirectoryIterator( $IN );

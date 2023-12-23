@@ -3,15 +3,15 @@
 namespace FinnFrameNet;
 
 use Html;
-use OutputPage;
-use ParserOutput;
-use Title;
+use MediaWiki\Content\Hook\ContentAlterParserOutputHook;
+use MediaWiki\Hook\BeforePageDisplayHook;
+use Override;
 
 /**
  * @author Niklas Laxström
  * @license GPL-2.0-or-later
  */
-class Hooks {
+class Hooks implements BeforePageDisplayHook, ContentAlterParserOutputHook {
 	private static array $colors = [
 		'#452a74',
 		'#832f1b',
@@ -50,24 +50,26 @@ class Hooks {
 		'#9ac859'
 	];
 
-	public static function onBeforePageDisplay( OutputPage $out ): void {
+	#[Override]
+	public function onBeforePageDisplay( $out, $skin ): void {
 		if ( $out->getTitle()->inNamespaces( NS_FINNFRAMENET, NS_TRANSFRAMENET ) ) {
 			$out->addModules( 'ext.finnframenet' );
 			$out->addModuleStyles( 'ext.finnframenet.styles' );
 		}
 	}
 
-	public static function onContentAlterParserOutput(
+	#[Override]
+	public function onContentAlterParserOutput(
 		$content,
-		Title $title,
-		ParserOutput $po
+		$title,
+		$parserOutput
 	): void {
 		if ( $title->inNamespaces( NS_FINNFRAMENET, NS_TRANSFRAMENET ) ) {
 			$text = $content->getNativeData();
 			if ( preg_match( '/types\s*=\s*([^|]+)\|/', $text, $match ) ) {
 				$types = explode( ';', $match[1] );
 				$css = self::getCSS( $types );
-				$po->addHeadItem( Html::inlineStyle( $css ) );
+				$parserOutput->addHeadItem( Html::inlineStyle( $css ) );
 			}
 		}
 	}
