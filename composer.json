@@ -31,5 +31,10 @@
 			"phpcs -p -s",
 			"minus-x check ."
 		]
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
 	}
 }
