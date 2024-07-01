@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mainframe98"
+			"Mainframe98",
+			"McDutchie"
 		]
 	},
+	"ffn-desc": "Geeft FinnFrameNet en TransFrameNet weer in een wiki-indeling",
+	"ffn-search-lus": "Naar andere frames met deze lexicale eenheid zoeken",
+	"ffn-actions--annotations": "Annotaties",
 	"ffn-fe-help": "(info)"
 }
