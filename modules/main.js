@@ -1,13 +1,13 @@
 ( function ( $, mw ) {
 	function getAnnotationType( element ) {
-		var match = $( element ).attr( 'class' ).match( /ffn-ann-([^ ]+)/ );
+		const match = $( element ).attr( 'class' ).match( /ffn-ann-([^ ]+)/ );
 		return match[ 0 ];
 	}
 
 	function getTypes( $elements ) {
-		var types = [];
+		const types = [];
 		$elements.each( function () {
-			var match = getAnnotationType( this );
+			const match = getAnnotationType( this );
 			if ( match ) {
 				types.push( match );
 			}
@@ -17,7 +17,7 @@
 	}
 
 	function onMouseEvent( e ) {
-		var i, className, elements;
+		let i, className, elements;
 
 		$( '.ffn-feh' ).removeClass( 'ffn-feh' );
 		if ( e.type !== 'mouseenter' ) {
@@ -32,26 +32,24 @@
 			}
 
 			elements = document.getElementsByClassName( className );
-			[].forEach.call( elements, function ( element ) {
+			[].forEach.call( elements, ( element ) => {
 				element.classList.add( 'ffn-feh' );
 			} );
 		}
 	}
 
 	function toggleFiltering() {
-		var types;
-
 		$( this ).toggleClass( 'ffn-filter' );
 		$( '.ffn-sentences .ffn-hide' ).removeClass( 'ffn-hide' );
 
-		types = getTypes( $( '.ffn-typelist .ffn-filter' ) );
+		const types = getTypes( $( '.ffn-typelist .ffn-filter' ) );
 		if ( types.length === 0 ) {
 			return;
 		}
 
 		$( '.ffn-sentences li' ).each( function () {
-			var i,
-				$s = $( this ),
+			const $s = $( this );
+			let i,
 				show = true;
 
 			for ( i = 0; i < types.length; i++ ) {
@@ -71,12 +69,12 @@
 	}
 
 	function addButtons( $content ) {
-		var $actions = $content.find( '.ffn-actions' );
+		const $actions = $content.find( '.ffn-actions' );
 
 		$( '<button>' )
 			.text( mw.message( 'ffn-actions--annotations' ).text() )
 			.addClass( 'mw-ui-button mw-ui-progressive' )
-			.on( 'click', function () {
+			.on( 'click', () => {
 				$( '.ffn-sentences' ).toggleClass( 'ffn-show-anns' );
 			} )
 			.appendTo( $actions );
@@ -85,23 +83,19 @@
 	}
 
 	function replaceAll( str, mapObj ) {
-		var re = new RegExp( Object.keys( mapObj ).join( '|' ), 'gi' );
+		const re = new RegExp( Object.keys( mapObj ).join( '|' ), 'gi' );
 
-		return str.replace( re, function ( m ) {
-			return mapObj[ m ];
-		} );
+		return str.replace( re, ( m ) => mapObj[ m ] );
 	}
 
 	function addLexicalUnitSearchLinks( $headings ) {
-		var conf, ns;
-
-		conf = mw.config.get( [ 'wgFormattedNamespaces', 'wgNamespaceNumber' ] );
-		ns = conf.wgFormattedNamespaces[ conf.wgNamespaceNumber ];
+		const conf = mw.config.get( [ 'wgFormattedNamespaces', 'wgNamespaceNumber' ] );
+		const ns = conf.wgFormattedNamespaces[ conf.wgNamespaceNumber ];
 
 		$headings.each( function () {
-			var url, $link, lu = $( this ).text();
+			const lu = $( this ).text();
 
-			url = new mw.Title( 'Special:Ask' ).getUrl( {
+			const url = new mw.Title( 'Special:Ask' ).getUrl( {
 				q: replaceAll( '[[Category:0]] [[FrameNet:Has lexical unit::1]]', [ ns, lu ] ),
 				'p[format]': 'ul',
 				'p[link]': 'none',
@@ -110,7 +104,7 @@
 				'p[userparam]': lu
 			} );
 
-			$link = $( '<a>' )
+			const $link = $( '<a>' )
 				.prop( {
 					href: url,
 					title: mw.message( 'ffn-search-lus' ).text()
