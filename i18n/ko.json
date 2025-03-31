@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Tensama0415",
 			"Ykhwong"
 		]
 	},
+	"ffn-desc": "FinnFrameNet과 TransFrameNet을 위키 형식으로 표시합니다.",
 	"ffn-fe-help": "(정보)"
 }
