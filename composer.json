@@ -12,8 +12,7 @@
 	],
 	"require": {
 		"guzzlehttp/guzzle": "~7.0",
-		"ext-json": "*",
-		"symfony/polyfill-php83": "*"
+		"ext-json": "*"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "v47.0.0",

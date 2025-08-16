@@ -2,9 +2,9 @@
 
 namespace FinnFrameNet;
 
-use Html;
 use MediaWiki\Content\Hook\ContentAlterParserOutputHook;
 use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\Html\Html;
 use Override;
 
 /**
