@@ -1,14 +1,15 @@
 {
-  "private": true,
-  "scripts": {
-    "test": "grunt test"
-  },
-  "devDependencies": {
-    "eslint-config-wikimedia": "0.31.0",
-    "grunt": "1.6.1",
-    "grunt-banana-checker": "0.13.0",
-    "grunt-eslint": "24.3.0",
-    "grunt-stylelint": "0.20.1",
-    "stylelint-config-wikimedia": "0.18.0"
-  }
+	"private": true,
+	"packageManager": "pnpm@10.15.1",
+	"scripts": {
+		"test": "grunt test"
+	},
+	"devDependencies": {
+		"eslint-config-wikimedia": "0.31.0",
+		"grunt": "1.6.1",
+		"grunt-banana-checker": "0.13.0",
+		"grunt-eslint": "24.3.0",
+		"grunt-stylelint": "0.20.1",
+		"stylelint-config-wikimedia": "0.18.0"
+	}
 }

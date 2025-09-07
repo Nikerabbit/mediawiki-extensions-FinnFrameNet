@@ -1,0 +1,21 @@
+name: Node test
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
