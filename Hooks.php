@@ -66,7 +66,7 @@ class Hooks implements BeforePageDisplayHook, ContentAlterParserOutputHook {
 	): void {
 		if ( $title->inNamespaces( NS_FINNFRAMENET, NS_TRANSFRAMENET ) ) {
 			$text = $content->getNativeData();
-			if ( preg_match( '/types\s*=\s*([^|]+)\|/', $text, $match ) ) {
+			if ( preg_match( '/types\s*=\s*([^|]+)\|/', (string)$text, $match ) ) {
 				$types = explode( ';', $match[1] );
 				$css = self::getCSS( $types );
 				$parserOutput->addHeadItem( Html::inlineStyle( $css ) );
@@ -80,7 +80,7 @@ class Hooks implements BeforePageDisplayHook, ContentAlterParserOutputHook {
 
 		$j = 0;
 		for ( $i = 0; $i < $len; $i++ ) {
-			$type = trim( $types[$i] );
+			$type = trim( (string)$types[$i] );
 			$color = self::$colors[$j % count( self::$colors )];
 			if ( $type !== 'FEE' && $type !== 'FEEM' ) {
 				$j++;

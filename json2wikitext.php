@@ -15,16 +15,16 @@ function parseEntry( array $entry ): array {
 	$linearDoc = linearize( $sentence );
 	$linearDoc = mergeSegments( $linearDoc );
 
-	if ( trim( $fiLU ) === '' ) {
+	if ( trim( (string)$fiLU ) === '' ) {
 		$fiLU = '???';
 	}
 
-	if ( trim( $frame ) === '' ) {
+	if ( trim( (string)$frame ) === '' ) {
 		$frame = '???';
 	}
 
 	$text = stringify( $linearDoc );
-	$frame = trim( $frame, ' _' );
+	$frame = trim( (string)$frame, ' _' );
 
 	return [ "FinnFrameNet:$frame" => [ $fiLU => $text ] ];
 }
@@ -173,7 +173,7 @@ function splitMultiPart( $sentence ): array {
 
 function collectTypes( $input ): array {
 	$types = [];
-	preg_match_all( '~{{FFN/E\|([^|]+)~', $input, $matches );
+	preg_match_all( '~{{FFN/E\|([^|]+)~', (string)$input, $matches );
 	foreach ( $matches[1] as $match ) {
 		foreach ( explode( ';', $match ) as $type ) {
 			$types[$type] = true;
@@ -190,7 +190,7 @@ function process( $IN, $OUT ) {
 	$data = json_decode( file_get_contents( $IN ), true );
 
 	$pages = [];
-	foreach ( $data as $index => $rawEntry ) {
+	foreach ( $data as $rawEntry ) {
 		foreach ( parseEntry( $rawEntry ) as $page => $value ) {
 			$pages[$page][] = $value;
 		}

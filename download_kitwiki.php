@@ -25,7 +25,7 @@ function parseElements( $html ): array {
 	// Consume all html attributes.
 	$c = '[^<>]+';
 	$re = "~<td$c>\s*<a href=\"([^\"]+)\"$c>($c)</a>\s*</td>\s*<td$c>($c)</td>~";
-	preg_match_all( $re, $html, $matches, PREG_SET_ORDER );
+	preg_match_all( $re, (string)$html, $matches, PREG_SET_ORDER );
 
 	$elements = [];
 	foreach ( $matches as $m ) {
@@ -51,7 +51,7 @@ function downloadDescriptions( array $elements ) {
 
 	$pool = new Pool( $client, $requests, [
 		'concurrency' => 5,
-		'fulfilled' => static function ( $response, $index ) use ( &$elements ) {
+		'fulfilled' => static function ( $response, $index ) use ( &$elements ): void {
 			# echo [ 'O', 'o' ][ mt_rand( 0, 1 ) ];
 			$body = $response->getBody()->getContents();
 			$elements[$index]['description'] = parseDescriptionPage( $body );
@@ -63,7 +63,7 @@ function downloadDescriptions( array $elements ) {
 				] );
 			}
 		},
-		'rejected' => static function ( $reason, $index ) use ( $elements ) {
+		'rejected' => static function ( $reason, $index ) use ( $elements ): void {
 			$url = $elements[$index]['url'];
 			echo "\nFailed to download $url: $reason\n";
 		},
@@ -95,8 +95,8 @@ function parseDescriptionPage( $html ): array {
 	preg_match( '~(<h2>.*)</div><!-- /patternTopic--~s', $html, $match );
 	$content = $match[1];
 	$content = preg_replace( '~-- <a.*~s', '', $content );
-	$content = preg_replace( '~<p />|</?ul>~', '', $content );
-	$content = preg_replace( '~<li>\s+(.*)\s+</li>~sU', "\\1\n", $content );
+	$content = preg_replace( '~<p />|</?ul>~', '', (string)$content );
+	$content = preg_replace( '~<li>\s+(.*)\s+</li>~sU', "\\1\n", (string)$content );
 	$content = str_replace( 'Esiintyy kehyksissä:', '', $content );
 
 	$sectionMap = [

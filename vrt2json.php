@@ -28,7 +28,7 @@ function process( $IN, $OUT ): void {
 function parse( $string ): array {
 	$output = [];
 	$matches = [];
-	preg_match_all( '~<sentence (.+)>\n(.+)\n</sentence>~sU', $string, $matches, PREG_SET_ORDER );
+	preg_match_all( '~<sentence (.+)>\n(.+)\n</sentence>~sU', (string)$string, $matches, PREG_SET_ORDER );
 
 	foreach ( $matches as $sentence ) {
 		$attributes = parseAttributes( $sentence[1] );
@@ -36,9 +36,7 @@ function parse( $string ): array {
 
 		$columns = parseSentences( $sentence[2] );
 		for ( $i = 1; $i < 4; $i++ ) {
-			$columns[$i] = array_filter( $columns[$i], static function ( $x ) {
-				return $x !== '_';
-			} );
+			$columns[$i] = array_filter( $columns[$i], static fn ( $x ) => $x !== '_' );
 		}
 
 		$output[] = [
@@ -53,7 +51,7 @@ function parse( $string ): array {
 function parseAttributes( $string ): array {
 	$output = [];
 	$matches = [];
-	preg_match_all( '~([a-z]+)="([^"]*)"~', $string, $matches, PREG_SET_ORDER );
+	preg_match_all( '~([a-z]+)="([^"]*)"~', (string)$string, $matches, PREG_SET_ORDER );
 	foreach ( $matches as $match ) {
 		$output[$match[1]] = trim( $match[2] );
 	}
@@ -63,7 +61,7 @@ function parseAttributes( $string ): array {
 
 function parseSentences( $string ): array {
 	$matches = [];
-	preg_match_all( '~^(.+)\t(.+)\t(.+)\t(.+)\t(.+)$~m', $string, $matches );
+	preg_match_all( '~^(.+)\t(.+)\t(.+)\t(.+)\t(.+)$~m', (string)$string, $matches );
 
 	array_shift( $matches );
 	$matches[0] = $matches[4];

@@ -14,11 +14,11 @@ function parseEntry( array $entry ): array {
 	$linearDoc = linearize( $entry[1] );
 	$text = stringify( $linearDoc );
 
-	if ( trim( $LU ) === '' ) {
+	if ( trim( (string)$LU ) === '' ) {
 		$LU = '???';
 	}
 
-	if ( trim( $frame ) === '' ) {
+	if ( trim( (string)$frame ) === '' ) {
 		$frame = '???';
 	}
 
@@ -75,7 +75,7 @@ function linearize( array $sentence ): array {
 
 function collectTypes( $input ): array {
 	$types = [];
-	preg_match_all( '~{{FFN/T\|([^|]+)~', $input, $matches );
+	preg_match_all( '~{{FFN/T\|([^|]+)~', (string)$input, $matches );
 	foreach ( $matches[1] as $match ) {
 		foreach ( explode( ';', $match ) as $type ) {
 			$types[$type] = true;

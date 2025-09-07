@@ -28,7 +28,7 @@ function process( $IN, $OUT ): void {
 function parse( $string ): array {
 	$output = [];
 
-	$string = preg_replace( '~\R~u', "\n", $string );
+	$string = preg_replace( '~\R~u', "\n", (string)$string );
 
 	$parts = preg_split( "/\n,\s*,\s*,\s*,\s*,\n/", $string );
 
@@ -37,9 +37,7 @@ function parse( $string ): array {
 
 		$columns = parseSentences( $part );
 		for ( $i = 1; $i < 4; $i++ ) {
-			$columns[$i] = array_filter( $columns[$i], static function ( $x ) {
-				return $x !== '';
-			} );
+			$columns[$i] = array_filter( $columns[$i], static fn ( $x ) => $x !== '' );
 		}
 
 		$columns[2] = array_map( strtolower( ... ), $columns[2] );
@@ -55,7 +53,7 @@ function parse( $string ): array {
 
 function parseAttributes( $string ) {
 	$matches = [];
-	if ( !preg_match( '/^# item,([^,]+),([^,]+)/m', $string, $matches ) ) {
+	if ( !preg_match( '/^# item,([^,]+),([^,]+)/m', (string)$string, $matches ) ) {
 		var_dump( $string );
 		die();
 	}
@@ -69,7 +67,7 @@ function parseAttributes( $string ) {
 function parseSentences( $string ): array {
 	$output = [];
 
-	$lines = explode( "\n", $string );
+	$lines = explode( "\n", (string)$string );
 	foreach ( $lines as $lineNo => $line ) {
 		if ( $lineNo < 2 || trim( $line ) === '' || $line[0] === '#' ) {
 			continue;
