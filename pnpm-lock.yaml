@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       eslint-config-wikimedia:
-        specifier: 0.32.1
-        version: 0.32.1(typescript@5.8.3)
+        specifier: 0.32.2
+        version: 0.32.2(typescript@5.8.3)
       grunt:
         specifier: 1.6.1
         version: 1.6.1
@@ -499,8 +499,8 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  eslint-config-wikimedia@0.32.1:
-    resolution: {integrity: sha512-gPvhyVFNlpKFOcJfoVTNlzg3A0b6qjhAbjjBIJ9xp5m+om0oqix5gkqIIEav5BaGxdDxYNmrY4ge3DAPP3u/lg==}
+  eslint-config-wikimedia@0.32.2:
+    resolution: {integrity: sha512-vAGz50AJPk23qQ701sL4tAgaF8FEAkP/E3kgojSTVrGgmDqjnRvq8z3EItDNI/EAkb5Ys15WPPFsoBH8YhTdSg==}
     engines: {node: '>=20 <25'}
 
   eslint-plugin-compat@6.0.2:
@@ -2141,7 +2141,7 @@ snapshots:
       eslint: 8.57.1
       semver: 7.7.3
 
-  eslint-config-wikimedia@0.32.1(typescript@5.8.3):
+  eslint-config-wikimedia@0.32.2(typescript@5.8.3):
     dependencies:
       '@stylistic/eslint-plugin': 3.1.0(eslint@8.57.1)(typescript@5.8.3)
       '@typescript-eslint/eslint-plugin': 8.46.0(@typescript-eslint/parser@8.46.0(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)
