@@ -5,7 +5,7 @@ $OUT = $argv[2] ?? 'entrypages';
 
 process( $IN, $OUT );
 
-function parseEntry( $frame, array $entry ): array {
+function parseEntry( string $frame, array $entry ): array {
 	$output = [
 		'name' => $frame,
 		'type' => $entry['description']['type'],
@@ -20,13 +20,14 @@ function formatEntry( array $templateData ): string {
 	foreach ( $templateData as $k => $v ) {
 		$fmt .= "|$k=$v\n";
 	}
-	$fmt .= "}}\n";
 
-	return $fmt;
+	return $fmt . "}}\n";
 }
 
-function process( $IN, $OUT ): void {
-	is_dir( $OUT ) || mkdir( $OUT );
+function process( string $IN, string $OUT ): void {
+	if ( !is_dir( $OUT ) ) {
+		mkdir( $OUT );
+	}
 	$data = json_decode( file_get_contents( $IN ), true );
 
 	$pages = [];

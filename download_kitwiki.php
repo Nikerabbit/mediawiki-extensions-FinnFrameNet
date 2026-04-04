@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
 
-function main() {
+function main(): void {
 	$elements = getElements();
 	downloadDescriptions( $elements );
 }
@@ -29,7 +29,7 @@ function parseElements( $html ): array {
 
 	$elements = [];
 	foreach ( $matches as $m ) {
-		$frames = array_map( 'strtolower', array_map( 'trim', explode( ',', $m[3] ) ) );
+		$frames = array_map( strtolower( ... ), array_map( trim( ... ), explode( ',', $m[3] ) ) );
 		sort( $frames );
 
 		$elements[$m[2]] = [
@@ -41,7 +41,7 @@ function parseElements( $html ): array {
 	return $elements;
 }
 
-function downloadDescriptions( array $elements ) {
+function downloadDescriptions( array $elements ): void {
 	$client = new Client( [ 'base_uri' => 'https://kitwiki.csc.fi' ] );
 	$requests = [];
 
@@ -123,7 +123,7 @@ function parseDescriptionPage( $html ): array {
 			$section = $sectionMap[ trim( $match[1] ) ];
 		} elseif ( $section === 'frames' ) {
 			$line = strip_tags( $line );
-			$frames = array_map( 'strtolower', array_map( 'trim', explode( ',', $line ) ) );
+			$frames = array_map( strtolower( ... ), array_map( trim( ... ), explode( ',', $line ) ) );
 			sort( $frames );
 			$parsed[$section] = $frames;
 			break;

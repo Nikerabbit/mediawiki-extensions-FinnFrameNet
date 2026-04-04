@@ -106,7 +106,7 @@ function mergeSegments( array $linearDoc ): array {
 	return $mergedLinearDoc;
 }
 
-function composeMergeSegment( $doc, $start, $end ) {
+function composeMergeSegment( array $doc, $start, $end ) {
 	$text = '';
 	for ( $i = $start; $i <= $end; $i++ ) {
 		$text .= $doc[ $i ][ 0 ];
@@ -185,8 +185,10 @@ function collectTypes( $input ): array {
 	return $uniqueTypes;
 }
 
-function process( $IN, $OUT ) {
-	is_dir( $OUT ) || mkdir( $OUT );
+function process( $IN, $OUT ): void {
+	if ( !is_dir( $OUT ) ) {
+		mkdir( $OUT );
+	}
 	$data = json_decode( file_get_contents( $IN ), true );
 
 	$pages = [];

@@ -30,14 +30,14 @@ function parse( $string ): array {
 
 	$string = preg_replace( '~\R~u', "\n", (string)$string );
 
-	$parts = preg_split( "/\n,\s*,\s*,\s*,\s*,\n/", $string );
+	$parts = preg_split( "/\n,\s*,\s*,\s*,\s*,\n/", (string)$string );
 
 	foreach ( $parts as $part ) {
 		$attributes = parseAttributes( $part );
 
 		$columns = parseSentences( $part );
 		for ( $i = 1; $i < 4; $i++ ) {
-			$columns[$i] = array_filter( $columns[$i], static fn ( $x ) => $x !== '' );
+			$columns[$i] = array_filter( $columns[$i], static fn ( $x ): bool => $x !== '' );
 		}
 
 		$columns[2] = array_map( strtolower( ... ), $columns[2] );
@@ -51,7 +51,7 @@ function parse( $string ): array {
 	return $output;
 }
 
-function parseAttributes( $string ) {
+function parseAttributes( $string ): array {
 	$matches = [];
 	if ( !preg_match( '/^# item,([^,]+),([^,]+)/m', (string)$string, $matches ) ) {
 		var_dump( $string );
