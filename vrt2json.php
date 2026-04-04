@@ -36,7 +36,7 @@ function parse( $string ): array {
 
 		$columns = parseSentences( $sentence[2] );
 		for ( $i = 1; $i < 4; $i++ ) {
-			$columns[$i] = array_filter( $columns[$i], static fn ( $x ) => $x !== '_' );
+			$columns[$i] = array_filter( $columns[$i], static fn ( $x ): bool => $x !== '_' );
 		}
 
 		$output[] = [

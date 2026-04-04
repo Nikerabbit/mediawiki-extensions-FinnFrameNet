@@ -68,13 +68,13 @@ class Hooks implements BeforePageDisplayHook, ContentAlterParserOutputHook {
 			$text = $content->getNativeData();
 			if ( preg_match( '/types\s*=\s*([^|]+)\|/', (string)$text, $match ) ) {
 				$types = explode( ';', $match[1] );
-				$css = self::getCSS( $types );
+				$css = $this->getCSS( $types );
 				$parserOutput->addHeadItem( Html::inlineStyle( $css ) );
 			}
 		}
 	}
 
-	private static function getCSS( array $types ): string {
+	private function getCSS( array $types ): string {
 		$css = [];
 		$len = count( $types );
 

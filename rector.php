@@ -10,6 +10,9 @@ return RectorConfig::configure()
 	] )
 	->withSkipPath( 'vendor' )
 	->withPhpSets()
-	->withTypeCoverageLevel( 0 )
-	->withDeadCodeLevel( 0 )
-	->withCodeQualityLevel( 0 );
+	->withPreparedSets(
+		deadCode: true,
+		codeQuality: true,
+		typeDeclarations: true,
+		privatization: true,
+	);
