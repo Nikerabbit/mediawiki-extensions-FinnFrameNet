@@ -5,7 +5,7 @@ $OUT = $argv[2] ?? 'entrypages';
 
 process( $IN, $OUT );
 
-function parseEntry( string $frame, array $entry ): array {
+function parseDescriptionEntry( string $frame, array $entry ): array {
 	$output = [
 		'name' => $frame,
 		'type' => $entry['description']['type'],
@@ -32,7 +32,7 @@ function process( string $IN, string $OUT ): void {
 
 	$pages = [];
 	foreach ( $data as $index => $rawEntry ) {
-		foreach ( parseEntry( $index, $rawEntry ) as $page => $value ) {
+		foreach ( parseDescriptionEntry( $index, $rawEntry ) as $page => $value ) {
 			$pages[$page] = $value;
 		}
 	}
