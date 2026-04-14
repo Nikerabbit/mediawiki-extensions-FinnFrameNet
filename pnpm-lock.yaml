@@ -12,14 +12,14 @@ importers:
         specifier: 0.32.3
         version: 0.32.3(typescript@5.8.3)
       grunt:
-        specifier: 1.6.1
-        version: 1.6.1
+        specifier: 1.6.2
+        version: 1.6.2
       grunt-banana-checker:
         specifier: 0.13.0
         version: 0.13.0
       grunt-eslint:
         specifier: 24.3.0
-        version: 24.3.0(grunt@1.6.1)
+        version: 24.3.0(grunt@1.6.2)
       grunt-stylelint:
         specifier: 0.21.0
         version: 0.21.0(stylelint@17.6.0(typescript@5.8.3))
@@ -893,8 +893,8 @@ packages:
     peerDependencies:
       stylelint: 17.x
 
-  grunt@1.6.1:
-    resolution: {integrity: sha512-/ABUy3gYWu5iBmrUSRBP97JLpQUm0GgVveDCp6t3yRNIoltIYw7rEj3g5y1o2PGPR2vfTRGa7WC/LZHLTXnEzA==}
+  grunt@1.6.2:
+    resolution: {integrity: sha512-bUzh5nA/P5L66ihXTDP6J5BGnMB/8lXJXejYWSbH4Y4TvWM9t2S39sggQDYYQlx06cYcCsmu63HMYHGCIzUVfg==}
     engines: {node: '>=16'}
     hasBin: true
 
@@ -1162,11 +1162,11 @@ packages:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==}
     engines: {node: '>=4'}
 
-  minimatch@3.0.8:
-    resolution: {integrity: sha512-6FsRAQsxQ61mw+qP1ZzbL9Bc78x2p5OqNgNpnoAFLTrX8n5Kxph0CsnhmKKNXTWjXqU5L0pGPR7hYk+XWZr60Q==}
-
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
+
+  minimatch@3.1.5:
+    resolution: {integrity: sha512-VgjWUsnnT6n+NUk6eZq77zeFdpW2LWDzP6zFGrCbHXiYNul5Dzqk2HHQ5uFH2DNW5Xbp8+jVzaeNt94ssEEl4w==}
 
   minimatch@9.0.5:
     resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
@@ -1190,12 +1190,13 @@ packages:
   node-releases@2.0.37:
     resolution: {integrity: sha512-1h5gKZCF+pO/o3Iqt5Jp7wc9rH3eJJ0+nh/CIoiRwjRxde/hAHyLPXYN4V3CqKAbiZPSeJFSWHmJsbkicta0Eg==}
 
-  nopt@3.0.6:
-    resolution: {integrity: sha512-4GUt3kSEYmk4ITxzB/b9vaIDfUVWN/Ml1Fwl11IlnIG2iaJ9O6WXZ9SrYM9NLI8OCBieN2Y8SWC2oJV0RQ7qYg==}
-    hasBin: true
-
   nopt@4.0.3:
     resolution: {integrity: sha512-CvaGwVMztSMJLOeXPrez7fyfObdZqNUK1cPAEzLHrTybIua9pMdmmPR5YwtfNftIOMv3DPUhFaxsZMNTQO20Kg==}
+    hasBin: true
+
+  nopt@5.0.0:
+    resolution: {integrity: sha512-Tbj67rffqceeLpcRXrT7vKAN8CwfPeIBgM7E6iBkmKLV7bEMwpGgYLGv0jACUsECaa/vuxP0IjEont6umdMgtQ==}
+    engines: {node: '>=6'}
     hasBin: true
 
   normalize-package-data@2.5.0:
@@ -2632,7 +2633,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.8
+      minimatch: 3.1.5
       once: 1.4.0
       path-is-absolute: 1.0.1
 
@@ -2704,11 +2705,11 @@ snapshots:
       nopt: 4.0.3
       v8flags: 3.2.0
 
-  grunt-eslint@24.3.0(grunt@1.6.1):
+  grunt-eslint@24.3.0(grunt@1.6.2):
     dependencies:
       chalk: 4.1.2
       eslint: 8.57.1
-      grunt: 1.6.1
+      grunt: 1.6.2
     transitivePeerDependencies:
       - supports-color
 
@@ -2741,7 +2742,7 @@ snapshots:
       chalk: 4.1.2
       stylelint: 17.6.0(typescript@5.8.3)
 
-  grunt@1.6.1:
+  grunt@1.6.2:
     dependencies:
       dateformat: 4.6.3
       eventemitter2: 0.4.14
@@ -2754,8 +2755,8 @@ snapshots:
       grunt-legacy-util: 2.0.1
       iconv-lite: 0.6.3
       js-yaml: 3.14.1
-      minimatch: 3.0.8
-      nopt: 3.0.6
+      minimatch: 3.1.5
+      nopt: 5.0.0
 
   has-flag@4.0.0: {}
 
@@ -2967,11 +2968,11 @@ snapshots:
 
   min-indent@1.0.1: {}
 
-  minimatch@3.0.8:
+  minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.12
 
-  minimatch@3.1.2:
+  minimatch@3.1.5:
     dependencies:
       brace-expansion: 1.1.12
 
@@ -2995,14 +2996,14 @@ snapshots:
 
   node-releases@2.0.37: {}
 
-  nopt@3.0.6:
-    dependencies:
-      abbrev: 1.1.1
-
   nopt@4.0.3:
     dependencies:
       abbrev: 1.1.1
       osenv: 0.1.5
+
+  nopt@5.0.0:
+    dependencies:
+      abbrev: 1.1.1
 
   normalize-package-data@2.5.0:
     dependencies:
