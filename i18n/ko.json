@@ -6,5 +6,6 @@
 		]
 	},
 	"ffn-desc": "FinnFrameNet과 TransFrameNet을 위키 형식으로 표시합니다.",
+	"ffn-actions--annotations": "주석",
 	"ffn-fe-help": "(정보)"
 }
