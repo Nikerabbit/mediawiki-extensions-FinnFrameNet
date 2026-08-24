@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"ffn-desc": "Zobrazuje FinnFrameNet a TransFrameNet vo formáte wiki",
+	"ffn-search-lus": "Hľadať ďalšie rámce obsahujúce túto lexikálnu jednotku",
+	"ffn-actions--annotations": "Anotácie",
+	"ffn-fe-help": "(info)"
+}
