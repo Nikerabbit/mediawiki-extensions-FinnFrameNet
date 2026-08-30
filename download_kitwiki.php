@@ -140,9 +140,7 @@ function parseDescriptionPage( $html ): array {
 		}
 	}
 
-	if ( !isset( $parsed['frames'] ) ) {
-		$parsed['frames'] = [];
-	}
+	$parsed['frames'] ??= [];
 
 	return $parsed;
 }
