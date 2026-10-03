@@ -3,8 +3,9 @@
 namespace FinnFrameNet;
 
 use MediaWiki\Content\Hook\ContentAlterParserOutputHook;
-use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\Content\TextContent;
 use MediaWiki\Html\Html;
+use MediaWiki\Output\Hook\BeforePageDisplayHook;
 use Override;
 
 /**
@@ -65,7 +66,10 @@ class Hooks implements BeforePageDisplayHook, ContentAlterParserOutputHook {
 		$parserOutput
 	): void {
 		if ( $title->inNamespaces( NS_FINNFRAMENET, NS_TRANSFRAMENET ) ) {
-			$text = $content->getNativeData();
+			if ( !$content instanceof TextContent ) {
+				return;
+			}
+			$text = $content->getText();
 			if ( preg_match( '/types\s*=\s*([^|]+)\|/', (string)$text, $match ) ) {
 				$types = explode( ';', $match[1] );
 				$css = $this->getCSS( $types );

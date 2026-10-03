@@ -8,7 +8,10 @@ return RectorConfig::configure()
 	->withPaths( [
 		__DIR__
 	] )
-	->withSkipPath( 'vendor' )
+	->withSkip( [
+		__DIR__ . '/vendor',
+		__DIR__ . '/node_modules',
+	] )
 	->withPhpSets()
 	->withPreparedSets(
 		deadCode: true,
