@@ -125,8 +125,21 @@ jobs:
           ${{ runner.os }}-php${{ matrix.php }}-composer-
           ${{ runner.os }}-composer-
 
-    - name: Install MediaWiki dependencies
-      run: composer install --working-dir mediawiki --prefer-dist --no-progress
+    - name: Merge extension runtime dependencies
+      run: |
+        cat > mediawiki/composer.local.json <<'JSON'
+        {
+          "extra": {
+            "merge-plugin": {
+              "include": [ "extensions/FinnFrameNet/composer.json" ],
+              "merge-dev": false
+            }
+          }
+        }
+        JSON
+
+    - name: Install MediaWiki and merged extension dependencies
+      run: composer update --working-dir mediawiki --prefer-dist --no-progress
 
     - name: Install extension dependencies
       run: composer install --working-dir mediawiki/extensions/FinnFrameNet --prefer-dist --no-progress
