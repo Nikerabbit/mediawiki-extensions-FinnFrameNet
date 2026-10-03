@@ -1,8 +1,5 @@
 name: PHP Composer
 
-permissions:
-  contents: read
-
 on:
   push:
     branches: [ master ]
@@ -10,47 +7,137 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build:
-    runs-on: ubuntu-26.04
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
+      fail-fast: false
       matrix:
-        php_version:
-          - 8.3
-          - 8.4
+        php: [ '8.3', '8.4', '8.5' ]
+
+    name: PHP ${{ matrix.php }} quality
+
     steps:
-      - uses: actions/checkout@v7
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php_version }}
-      - run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      with:
+        persist-credentials: false
 
-      - id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v6
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+    - name: Setup PHP
+      uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+      with:
+        php-version: ${{ matrix.php }}
+        coverage: none
+      env:
+        fail-fast: true
 
-      - run: composer install --prefer-dist
-      - run: composer run-script test
+    - name: Get Composer cache directory
+      id: composer-cache-dir
+      run: |
+        cache_dir="$(composer config --global cache-files-dir --absolute)"
+        mkdir -p "$cache_dir"
+        echo "dir=$cache_dir" >> "$GITHUB_OUTPUT"
 
-  rector:
-    runs-on: ubuntu-26.04
+    - name: Cache Composer downloads
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+      with:
+        path: ${{ steps.composer-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-php${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-php${{ matrix.php }}-composer-
+
+    - name: Validate Composer configuration
+      run: composer validate --strict
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Check platform requirements
+      run: composer check-platform-reqs
+
+    - name: Run test suite
+      run: composer run-script test
+
+    - name: Run Rector
+      run: composer run-script rector -- --dry-run --no-progress-bar
+
+  mediawiki:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - mediawiki: REL1_45
+          php: '8.3'
+        - mediawiki: REL1_46
+          php: '8.3'
+        - mediawiki: master
+          php: '8.4'
+        - mediawiki: master
+          php: '8.5'
+
+    name: MediaWiki ${{ matrix.mediawiki }} / PHP ${{ matrix.php }}
+
     steps:
-      - uses: actions/checkout@v7
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.3
+    - name: Check out MediaWiki
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      with:
+        repository: wikimedia/mediawiki
+        ref: ${{ matrix.mediawiki }}
+        path: mediawiki
+        persist-credentials: false
 
-      - id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v6
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+    - name: Check out FinnFrameNet
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      with:
+        path: mediawiki/extensions/FinnFrameNet
+        persist-credentials: false
 
-      - run: composer install --prefer-dist
-      - run: composer run-script rector -- --dry-run
+    - name: Setup PHP
+      uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+      with:
+        php-version: ${{ matrix.php }}
+        coverage: none
+      env:
+        fail-fast: true
+
+    - name: Get Composer cache directory
+      id: composer-cache-dir
+      run: |
+        cache_dir="$(composer config --global cache-files-dir --absolute)"
+        mkdir -p "$cache_dir"
+        echo "dir=$cache_dir" >> "$GITHUB_OUTPUT"
+
+    - name: Cache Composer downloads
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+      with:
+        path: ${{ steps.composer-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-php${{ matrix.php }}-mw${{ matrix.mediawiki }}-composer-${{ hashFiles('mediawiki/composer.lock', 'mediawiki/extensions/FinnFrameNet/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php${{ matrix.php }}-mw${{ matrix.mediawiki }}-composer-
+          ${{ runner.os }}-php${{ matrix.php }}-composer-
+          ${{ runner.os }}-composer-
+
+    - name: Install MediaWiki dependencies
+      run: composer install --working-dir mediawiki --prefer-dist --no-progress
+
+    - name: Install extension dependencies
+      run: composer install --working-dir mediawiki/extensions/FinnFrameNet --prefer-dist --no-progress
+
+    - name: Validate extension manifest
+      run: >-
+        php -r 'require "mediawiki/includes/AutoLoader.php";
+        $validator = new MediaWiki\Registration\ExtensionJsonValidator(
+        static function ($message) { throw new RuntimeException($message); });
+        $validator->checkDependencies();
+        $validator->validate("mediawiki/extensions/FinnFrameNet/extension.json");'
+
+    - name: Run Phan and taint analysis
+      run: composer --working-dir mediawiki/extensions/FinnFrameNet phan

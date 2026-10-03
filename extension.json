@@ -35,21 +35,24 @@
 				"ffn-search-lus",
 				"ffn-actions--annotations",
 				"ffn-actions--toc"
-			],
-			"targets": [ "desktop", "mobile" ]
+			]
 		},
 		"ext.finnframenet.styles": {
 			"styles": "styles.less",
 			"localBasePath": "modules",
-			"remoteExtPath": "FinnFrameNet/modules",
-			"targets": [ "desktop", "mobile" ]
+			"remoteExtPath": "FinnFrameNet/modules"
 		},
 		"jquery.stickykit": {
 			"scripts": "jquery.sticky-kit.js",
 			"localBasePath": "libs",
-			"remoteExtPath": "FinnFrameNet/libs",
-			"targets": [ "desktop", "mobile" ]
+			"remoteExtPath": "FinnFrameNet/libs"
 		}
 	},
-	"manifest_version": 2
+	"manifest_version": 2,
+	"requires": {
+		"MediaWiki": ">= 1.45.0",
+		"platform": {
+			"php": ">= 8.3.0"
+		}
+	}
 }
