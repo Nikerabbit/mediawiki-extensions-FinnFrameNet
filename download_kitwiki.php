@@ -120,6 +120,7 @@ function parseDescriptionPage( $html ): array {
 		if ( $line === '' ) {
 			continue;
 		}
+
 		if ( preg_match( "~<h2><a$c></a>(.*)</h2>~", $line, $match ) ) {
 			$section = $sectionMap[ trim( $match[1] ) ];
 		} elseif ( $section === 'frames' ) {

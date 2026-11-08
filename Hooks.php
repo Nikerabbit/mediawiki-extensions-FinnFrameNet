@@ -69,6 +69,7 @@ class Hooks implements BeforePageDisplayHook, ContentAlterParserOutputHook {
 			if ( !$content instanceof TextContent ) {
 				return;
 			}
+
 			$text = $content->getText();
 			if ( preg_match( '/types\s*=\s*([^|]+)\|/', (string)$text, $match ) ) {
 				$types = explode( ';', $match[1] );
@@ -90,6 +91,7 @@ class Hooks implements BeforePageDisplayHook, ContentAlterParserOutputHook {
 				$j++;
 				$css[] = ".ffn-ann-$type { color: $color; }";
 			}
+
 			$css[] = ".ffn-show-anns .ffn-ann-$type::before,";
 			$css[] = ".client-nojs .ffn-sentences .ffn-ann-$type::before { content: '[$type '; }";
 		}
