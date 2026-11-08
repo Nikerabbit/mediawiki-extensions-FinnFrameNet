@@ -28,6 +28,7 @@ function process( string $IN, string $OUT ): void {
 	if ( !is_dir( $OUT ) ) {
 		mkdir( $OUT );
 	}
+
 	$data = json_decode( file_get_contents( $IN ), true );
 
 	$pages = [];

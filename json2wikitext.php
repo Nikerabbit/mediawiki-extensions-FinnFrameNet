@@ -42,6 +42,7 @@ function stringify( array $linearDoc ): string {
 			$string .= "{{FFN/E|$classes|$text}}";
 		}
 	}
+
 	return $string;
 }
 
@@ -189,6 +190,7 @@ function process( $IN, $OUT ): void {
 	if ( !is_dir( $OUT ) ) {
 		mkdir( $OUT );
 	}
+
 	$data = json_decode( file_get_contents( $IN ), true );
 
 	$pages = [];
